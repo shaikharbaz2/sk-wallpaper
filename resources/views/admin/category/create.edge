@@ -1,0 +1,40 @@
+@layout('layouts/admin')
+@section('body')
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Category</h1>
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Create Category</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <form action="/category-save" method="POST">
+          <div class="form-group">
+            <label for="pwd">Name:</label>
+            <input type="text" class="form-control"  name="name" >
+            @if(flashMessages.has('errors.title'))
+           <p> {{ flashMessages.get('errors.name') }} </p>
+           @end
+          </div>
+          
+          <div class="form-group">
+            <label for="pwd">Description:</label>
+            <textarea class="form-control"  name="description"> </textarea>
+            @if(flashMessages.has('errors.descriptions'))
+           <p> {{ flashMessages.get('errors.descriptions') }} </p>
+           @end
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->
+
+@end

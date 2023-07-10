@@ -1,0 +1,52 @@
+@layout('layouts/user')
+
+@section('body')
+
+<div class="content-body">
+    <div class="container-fluid">
+        
+        <div class="row" style="padding-left: 60px;">
+            <div class="col-xl-11">
+                <div class="table-responsive table-hover fs-14">
+                    <table class="table display mb-4 dataTablesCard short-one card-table text-black" style="text-align: center;">
+                        <thead style="text-align: center;">
+                            <tr>
+                                
+                                <th>Transaction ID</th>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                        
+                            @each(transaction in transactions)
+                            <tr>
+                                
+                                <td>{{ transaction.id }}</td>
+                                <td>{{ transaction.createdAt}}</td>
+                                <td>{{ transaction.package_name}}</td>
+                                
+                                <td>
+                                    <span class="text-black font-w600">{{ transaction.amount}}</span>
+                                </td>
+                                
+                                <td>
+                                    <span class="btn-link text-danger">{{ transaction.status}}</span>
+
+                                </td>
+                            </tr>
+                            @end
+                           
+                        </tbody>
+                    </table>
+                </div>	
+            </div>
+        </div>
+    </div>
+</div>
+</div>	
+
+@end

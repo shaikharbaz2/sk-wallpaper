@@ -1,0 +1,61 @@
+@layout('layouts/admin')
+@section('body')
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Wallpaper</h1>
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Create Wallpaper</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <form action="/wallpaper-save" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="pwd">Name:</label>
+            <input type="text" class="form-control" name="name">
+            @if(flashMessages.has('errors.name'))
+            <p> {{ flashMessages.get('errors.name') }} </p>
+            @end
+          </div>
+          <div class="form-group">
+            <label for="pwd">Author:</label>
+            <input type="text" class="form-control" name="author">
+            @if(flashMessages.has('errors.author'))
+            <p> {{ flashMessages.get('errors.author') }} </p>
+            @end
+          </div>
+
+          <div class="form-group">
+            <label for="pwd">Category:</label>
+            <select name="category_id" id="cars" class="form-control">
+              @each(category in categories)
+              <option value="{{ category.id}}">{{category.name }}</option>
+              @end
+            </select>
+            @if(flashMessages.has('errors.category_id'))
+            <p> {{ flashMessages.get('errors.category_id') }} </p>
+            @end
+          </div>
+
+          <div class="form-group">
+            <label for="pwd">Select image:</label>
+            <input type="file" class="form-control" name="image">
+            @if(flashMessages.has('errors.image'))
+            <p> {{ flashMessages.get('errors.image') }} </p>
+            @end
+          </div>
+
+
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->
+
+@end
