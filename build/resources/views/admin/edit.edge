@@ -1,0 +1,45 @@
+@layout('layouts/admin')
+@section('body')
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">User List</h1>
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Edit user Details</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <form action="/update-user/{{ user.id }}" method="POST">
+          <div class="form-group">
+            <label for="pwd">First Name:</label>
+            <input type="text" class="form-control" id="pwd" name="fname" value="{{ user.fname}}">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Last Name:</label>
+            <input type="text" class="form-control" id="pwd" name="lname" value="{{ user.lname}}">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Contact:</label>
+            <input type="text" class="form-control" id="pwd" name="contact" value="{{ user.contact}}">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Alernative Contact:</label>
+            <input type="text" class="form-control" id="pwd" name="alt_contact" value="{{ user.alt_contact}}">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email}}">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->
+
+@end

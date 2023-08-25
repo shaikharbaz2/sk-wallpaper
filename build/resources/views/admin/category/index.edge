@@ -1,0 +1,58 @@
+@layout('layouts/admin')
+@section('body')
+
+<!-- End of Topbar -->
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Category List</h1>
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Category</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+                <th>Id</th>
+              <th>Name</th>
+              <th>date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @each(category in categories)
+            <tr>
+                 <td>{{ category.id}}</td>
+              <td>{{ category.name}}</td>
+              <td>{{ category.created_at}}</td>
+              <td><a href="/edit-category/{{ category.id }}" class="btn btn-primary">Edit</a> 
+                <a href="/delete-category/{{ category.id }}" class="btn btn-danger">Delete</a>
+            
+            </td>
+
+            </tr>
+            @end
+
+          </tbody>
+
+        </table>
+        <div>
+          @each(category in categories.getUrlsForRange(1, categories.lastPage))
+          <a href="{{ category.url }}">
+            {{ category.page }}
+          </a>
+          @endeach
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->
+@end
