@@ -47,18 +47,28 @@ export default class WallpapersController {
             size: '2mb',
             extnames: ['jpg', 'png', 'gif', 'jpeg'],
         })
+        const thumbnailImage = request.file('thumbnail', {
+            size: '2mb',
+            extnames: ['jpg', 'png', 'gif', 'jpeg'],
+        })
 
         if (!coverImage) {
+            return coverImage;
+        }
+        if(!thumbnailImage) {
             return coverImage;
         }
 
 
         var image_link = await this.uploadImage(coverImage);
+        var thumbnail_link = await this.uploadImage(thumbnailImage);
+
 
         const payload = await request.validate({ schema: newPostSchema })
         var wallpaper = new Wallpaper();
         wallpaper.name = payload.name;
         wallpaper.image = image_link;
+        wallpaper.thumbnail = thumbnail_link;
         wallpaper.author = payload.author;
         wallpaper.category_id = payload.category_id;
         await wallpaper.save();

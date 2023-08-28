@@ -106,7 +106,7 @@ class UsersController {
     }
     async logout({ auth, response }) {
         await auth.use('web').logout();
-        response.redirect('/login');
+        response.redirect('/admin');
     }
     async viewUser({ params, view }) {
         const user = await User_1.default.find(params.id);

@@ -14,8 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const luxon_1 = require("luxon");
 const Hash_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Core/Hash"));
-const Transaction_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Transaction"));
-const Package_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Package"));
 const Orm_1 = global[Symbol.for('ioc.use')]("Adonis/Lucid/Orm");
 class User extends Orm_1.BaseModel {
     static async hashPassword(user) {
@@ -72,14 +70,6 @@ __decorate([
     Orm_1.column.dateTime({ autoCreate: true, autoUpdate: true }),
     __metadata("design:type", luxon_1.DateTime)
 ], User.prototype, "updatedAt", void 0);
-__decorate([
-    Orm_1.hasMany(() => Transaction_1.default),
-    __metadata("design:type", Object)
-], User.prototype, "transactions", void 0);
-__decorate([
-    Orm_1.hasMany(() => Package_1.default),
-    __metadata("design:type", Object)
-], User.prototype, "packages", void 0);
 __decorate([
     Orm_1.beforeSave(),
     __metadata("design:type", Function),

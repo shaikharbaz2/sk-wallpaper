@@ -21,6 +21,9 @@ export default class Wallpaper extends BaseModel {
   @column()
   public image: string | null
 
+  @column()
+  public thumbnail: string | null
+
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const standalone_1 = require("@adonisjs/auth/build/standalone");
 class AuthMiddleware {
     constructor() {
-        this.redirectTo = '/login';
+        this.redirectTo = '/';
     }
     async authenticate(auth, guards) {
         let guardLastAttempted;

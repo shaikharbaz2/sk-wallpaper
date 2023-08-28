@@ -1,17 +1,13 @@
 import { DateTime } from 'luxon'
 
 import Hash from '@ioc:Adonis/Core/Hash'
-import Transaction from 'App/Models/Transaction'
-import Package from 'App/Models/Package'
 
 
 import {
   column,
   beforeSave,
   BaseModel,
-  HasMany,
-  hasMany,
-} from '@ioc:Adonis/Lucid/Orm'
+ } from '@ioc:Adonis/Lucid/Orm'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -56,13 +52,5 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
-
-
-  @hasMany(() => Transaction)
-  public transactions: HasMany<typeof Transaction>
-
-
-  @hasMany(() => Package)
-  public packages: HasMany<typeof Package>
 
 }

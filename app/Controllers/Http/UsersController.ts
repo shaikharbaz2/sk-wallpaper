@@ -125,7 +125,7 @@ export default class UsersController {
 
         public async logout({auth,response}: HttpContextContract) {
           await auth.use('web').logout()
-          response.redirect('/login')
+          response.redirect('/admin')
           }
 
 

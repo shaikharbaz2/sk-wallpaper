@@ -4,34 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Route_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Core/Route"));
-Route_1.default.get('/', async ({ view }) => {
-    return view.render('welcome');
-});
-Route_1.default.get('/form', async ({ view }) => {
-    return view.render('form');
-});
-Route_1.default.get('package', 'UserHomesController.package').middleware('auth');
-Route_1.default.get('checkout/:id', 'UserHomesController.checkout').middleware('auth');
-Route_1.default.get('market-capital', 'UserHomesController.MarketCapital').middleware('auth');
-Route_1.default.get('news', 'UserHomesController.newsFeed').middleware('auth');
-Route_1.default.post('payment/:id', 'TransactionsController.payment').middleware('auth');
-Route_1.default.get('transaction', 'TransactionsController.index').middleware('auth');
-Route_1.default.get('admin-transaction', 'TransactionsController.indexAdmin').middleware('auth');
-Route_1.default.post('transaction-status/:id', 'TransactionsController.changeStatus').middleware('auth');
-Route_1.default.post('save', 'UsersController.save');
 Route_1.default.get('dashboard', 'UsersController.index').middleware('auth');
 Route_1.default.get('user-list', 'UsersController.userList').middleware('auth');
-Route_1.default.get('/edit-user/:id', 'UsersController.editUser').middleware('auth');
-Route_1.default.get('/view-user/:id', 'UsersController.viewUser').middleware('auth');
-Route_1.default.post('/update-user/:id', 'UsersController.updateUser').middleware('auth');
-Route_1.default.get('/profile', 'UsersController.profile').middleware('auth');
 Route_1.default.get('/logout', 'UsersController.logout').middleware('auth');
-Route_1.default.get('/package-index/', 'PackagesController.index').middleware('auth');
-Route_1.default.get('/package-create/', 'PackagesController.create').middleware('auth');
-Route_1.default.post('/package-save/', 'PackagesController.save').middleware('auth');
-Route_1.default.get('/edit-package/:id', 'PackagesController.edit').middleware('auth');
-Route_1.default.post('/update-package/:id', 'PackagesController.update').middleware('auth');
-Route_1.default.get('/delete-package/:id', 'PackagesController.delete').middleware('auth');
 Route_1.default.get('/category-index/', 'CategoryController.index').middleware('auth');
 Route_1.default.get('/category-create/', 'CategoryController.create').middleware('auth');
 Route_1.default.post('/category-save/', 'CategoryController.save').middleware('auth');
@@ -44,8 +19,8 @@ Route_1.default.post('/wallpaper-save/', 'WallpapersController.save').middleware
 Route_1.default.get('/edit-wallpaper/:id', 'WallpapersController.edit').middleware('auth');
 Route_1.default.post('/update-wallpaper/:id', 'WallpapersController.update').middleware('auth');
 Route_1.default.get('/delete-wallpaper/:id', 'WallpapersController.delete').middleware('auth');
-Route_1.default.get('login', 'UsersController.login');
 Route_1.default.get('admin', 'UsersController.loginAdminPage');
+Route_1.default.get('/', 'UsersController.loginAdminPage');
 Route_1.default.get('signup', 'UsersController.sighupAdminPage');
 Route_1.default.post('signup', 'UsersController.sighupAdmin');
 Route_1.default.post('login', 'UsersController.loginUser');
