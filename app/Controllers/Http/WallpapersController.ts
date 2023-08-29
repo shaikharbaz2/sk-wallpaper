@@ -7,10 +7,6 @@ import { S3 } from 'aws-sdk';
 import Wallpaper from 'App/Models/Wallpaper';
 import fs from 'fs';
 
-
-
-
-
 export default class WallpapersController {
 
     public async index({ view, request }: HttpContextContract) {
