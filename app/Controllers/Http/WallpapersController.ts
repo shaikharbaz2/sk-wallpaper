@@ -4,8 +4,8 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import Category from 'App/Models/Category';
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { S3 } from 'aws-sdk';
-import { Buffer } from 'buffer';
 import Wallpaper from 'App/Models/Wallpaper';
+import fs from 'fs';
 
 
 
@@ -58,7 +58,11 @@ export default class WallpapersController {
         if(!thumbnailImage) {
             return coverImage;
         }
-
+        // const fileName = `${cuid()}.${coverImage.extname}`
+        // await coverImage.move(Application.publicPath('upload'), {
+        //     name: fileName,
+        //     overwrite: true,
+        // })
 
         var image_link = await this.uploadImage(coverImage);
         var thumbnail_link = await this.uploadImage(thumbnailImage);
@@ -117,6 +121,7 @@ export default class WallpapersController {
 
 
     public async uploadImage(file) {
+        
         const region = 'us-east-1';
         const bucketName = "wallpapers-test";
         const accessKeyId = "AKIA3OBPZDHWVIEIYJBK";
@@ -127,10 +132,8 @@ export default class WallpapersController {
             secretAccessKey: secretAccessKey,
             region: region,
         });
-
         const key = `${cuid()}.${file.extname}`
-
-        const buffer = Buffer.from(JSON.stringify(file), 'utf-8');
+        const buffer = fs.readFileSync(file.tmpPath)
         const params: S3.PutObjectRequest = {
             Bucket: bucketName,
             Key: key,

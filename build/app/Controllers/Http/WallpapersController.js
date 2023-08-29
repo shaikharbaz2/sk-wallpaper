@@ -8,8 +8,8 @@ const Database_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Lucid/D
 const Category_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Category"));
 const Helpers_1 = global[Symbol.for('ioc.use')]("Adonis/Core/Helpers");
 const aws_sdk_1 = require("aws-sdk");
-const buffer_1 = require("buffer");
 const Wallpaper_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Wallpaper"));
+const fs_1 = __importDefault(require("fs"));
 class WallpapersController {
     async index({ view, request }) {
         const page = request.input('page', 1);
@@ -96,7 +96,7 @@ class WallpapersController {
             region: region,
         });
         const key = `${Helpers_1.cuid()}.${file.extname}`;
-        const buffer = buffer_1.Buffer.from(JSON.stringify(file), 'utf-8');
+        const buffer = fs_1.default.readFileSync(file.tmpPath);
         const params = {
             Bucket: bucketName,
             Key: key,
