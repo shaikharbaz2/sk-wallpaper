@@ -43,7 +43,7 @@ export default class CategoryController {
     public async edit({ params, view }: HttpContextContract) {
         const categories = await Category.find(params.id)
         return view.render('admin/category/edit', {
-            Category: categories
+            category: categories
         });
     }
 

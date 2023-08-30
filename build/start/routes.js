@@ -24,4 +24,5 @@ Route_1.default.get('/', 'UsersController.loginAdminPage');
 Route_1.default.get('signup', 'UsersController.sighupAdminPage');
 Route_1.default.post('signup', 'UsersController.sighupAdmin');
 Route_1.default.post('login', 'UsersController.loginUser');
+Route_1.default.get('/all-wallpaper', 'WallpapersController.WallpaperListForApi');
 //# sourceMappingURL=routes.js.map

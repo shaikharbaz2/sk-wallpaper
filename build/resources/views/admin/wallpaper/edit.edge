@@ -4,36 +4,60 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Package</h1>
+  <h1 class="h3 mb-2 text-gray-800">wallpaper</h1>
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Edit Package</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Edit wallpaper</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <form action="/update-package/{{ package.id}}" method="POST">
+        <form action="/update-wallpaper/{{ wallpaper.id}}" method="POST" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="pwd">Title:</label>
-            <input type="text" class="form-control"  name="title" value="{{ package.title}}">
-            @if(flashMessages.has('errors.title'))
-           <p> {{ flashMessages.get('errors.title') }} </p>
+            <label for="pwd">Name:</label>
+            <input type="text" class="form-control"  name="name" value="{{ wallpaper.name}}">
+            @if(flashMessages.has('errors.name'))
+           <p> {{ flashMessages.get('errors.name') }} </p>
            @end
           </div>
+
           <div class="form-group">
-            <label for="pwd">Amount:</label>
-            <input type="text" class="form-control"  name="amount" value="{{ package.amount}}">
-            @if(flashMessages.has('errors.amount'))
-            <p> {{ flashMessages.get('errors.amount') }} </p>
+            <label for="pwd">Author:</label>
+            <input type="text" class="form-control"  name="author" value="{{ wallpaper.author}}">
+            @if(flashMessages.has('errors.author'))
+           <p> {{ flashMessages.get('errors.author') }} </p>
+           @end
+          </div>
+
+          <div class="form-group">
+            <label for="pwd">Category:</label>
+            <select name="category_id" id="cars" class="form-control">
+            <option value="{{ wallpaper.category_id}}" selected>{{wallpaper.category_name }}</option>
+              @each(category in categories)
+              <option value="{{ category.id}}">{{category.name }}</option>
+              @end
+            </select>
+            @if(flashMessages.has('errors.category_id'))
+            <p> {{ flashMessages.get('errors.category_id') }} </p>
             @end
           </div>
+
           <div class="form-group">
-            <label for="pwd">Description:</label>
-            <textarea class="form-control"  name="descriptions">{{ package.descriptions}} </textarea>
-            @if(flashMessages.has('errors.descriptions'))
-            <p> {{ flashMessages.get('errors.descriptions') }} </p>
+            <label for="pwd">Select image:</label>
+            <input type="file" class="form-control" name="image">
+            @if(flashMessages.has('errors.image'))
+            <p> {{ flashMessages.get('errors.image') }} </p>
             @end
           </div>
+           <div class="form-group">
+            <label for="pwd">Upload Thumbnail</label>
+            <input type="file" class="form-control" name="thumbnail">
+            @if(flashMessages.has('errors.thumbnail'))
+            <p> {{ flashMessages.get('errors.thumbnail') }} </p>
+            @end
+          </div>
+
+          
           <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
       </div>

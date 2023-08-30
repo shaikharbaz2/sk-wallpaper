@@ -67,3 +67,7 @@ Route.post('login', 'UsersController.loginUser')
 
 
 
+
+//api
+Route.get('/all-wallpaper', 'WallpapersController.WallpaperListForApi');
+

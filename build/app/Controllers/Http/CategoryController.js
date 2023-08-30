@@ -32,7 +32,7 @@ class CategoryController {
     async edit({ params, view }) {
         const categories = await Category_1.default.find(params.id);
         return view.render('admin/category/edit', {
-            Category: categories
+            category: categories
         });
     }
     async update({ response, request, params }) {

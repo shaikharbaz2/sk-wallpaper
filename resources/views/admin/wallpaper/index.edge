@@ -20,8 +20,9 @@
             <tr>
               <th>Name</th>
               <th>author</th>
+               <th>Category Name</th>
                <th>Image</th>
-              <th>date</th>
+                <th>Thumbnail</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -31,12 +32,17 @@
             <tr>
               <td>{{ wallpaper.name}}</td>
               <td>{{ wallpaper.author}}</td>
+              <td>{{ wallpaper.category_name}}</td>
               <td>
               
               <img  src="{{ wallpaper.image }}" width=150px" height="70px"  loading="lazy">
             
               </td>
-              <td>{{ wallpaper.created_at}}</td>
+              <td>
+              
+              <img  src="{{ wallpaper.thumbnail }}" width=150px" height="70px"  loading="lazy">
+            
+              </td>
               <td><a href="/edit-wallpaper/{{ wallpaper.id }}" class="btn btn-primary">Edit</a> 
                 <a href="/delete-wallpaper/{{ wallpaper.id }}" class="btn btn-danger">Delete</a>
             

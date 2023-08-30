@@ -15,10 +15,9 @@ class WallpapersController {
         const page = request.input('page', 1);
         const limit = 10;
         const wallpapers = await Database_1.default.from('wallpapers')
-            .select('*')
             .join('categories', 'wallpapers.category_id', 'categories.id')
+            .select('categories.name as category_name', 'wallpapers.*')
             .paginate(page, limit);
-        console.log(wallpapers);
         wallpapers.baseUrl('/wallpaper-index');
         return view.render('admin.wallpaper.index', { wallpapers: wallpapers });
     }
@@ -59,22 +58,42 @@ class WallpapersController {
         return response.redirect('/wallpaper-index');
     }
     async edit({ params, view }) {
-        const wallpaper = await Wallpaper_1.default.find(params.id);
+        const wallpaper = await Database_1.default.from('wallpapers')
+            .join('categories', 'wallpapers.category_id', 'categories.id')
+            .select('categories.name as category_name', 'categories.id as category_id', 'wallpapers.*')
+            .where('wallpapers.id', params.id)
+            .first();
+        const categories = await Category_1.default.all();
         return view.render('admin/wallpaper/edit', {
-            wallpaper: wallpaper
+            wallpaper: wallpaper,
+            categories: categories
         });
     }
     async update({ response, request, params }) {
         const newPostSchema = Validator_1.schema.create({
             name: Validator_1.schema.string(),
-            image: Validator_1.schema.string(),
             author: Validator_1.schema.string(),
             category_id: Validator_1.schema.number(),
         });
         const payload = await request.validate({ schema: newPostSchema });
+        const coverImage = request.file('image', {
+            size: '2mb',
+            extnames: ['jpg', 'png', 'gif', 'jpeg'],
+        });
+        const thumbnailImage = request.file('thumbnail', {
+            size: '2mb',
+            extnames: ['jpg', 'png', 'gif', 'jpeg'],
+        });
         const wallpaper = await Wallpaper_1.default.findOrFail(params.id);
+        if (coverImage) {
+            var image_link = await this.uploadImage(coverImage);
+            wallpaper.image = image_link;
+        }
+        if (thumbnailImage) {
+            var thumbnail_link = await this.uploadImage(thumbnailImage);
+            wallpaper.thumbnail = thumbnail_link;
+        }
         wallpaper.name = payload.name;
-        wallpaper.image = payload.image;
         wallpaper.author = payload.author;
         wallpaper.category_id = payload.category_id;
         await wallpaper.save();
@@ -112,6 +131,10 @@ class WallpapersController {
             console.error('Error uploading file:', error);
             throw error;
         }
+    }
+    async WallpaperListForApi() {
+        const wallpapers = await Wallpaper_1.default.all();
+        return { wallpapers: wallpapers };
     }
 }
 exports.default = WallpapersController;
